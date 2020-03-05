@@ -1,0 +1,188 @@
+\newtheorem{Theorem}{Теорема}
+\newtheorem{Proof}{Доказательство теоремы}
+\newtheorem{Definition}{Определение}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Designation}{Обозначение}
+
+
+\newpage
+\section{О работе}
+\cite{CramerRaoDiffenition}
+\cite{VeretennikovLectures16}
+Изучение поведения различных оценок случайных процессов - это классическая задача теории вероятностей, которая уже давно изучаелся для различных моделей: независимых процессов, макровским процессов, семимартингалов, диффузионных процессов. Распространнёность задач данного типа хорошо объясняется их важностью в приложениях популярных сфер: биологии, физики, теории информации, финансовой математики и пр.
+\\
+Основным результатом данной работы является доказательство и исследование необходимых условия для ассимптотической эффективности оценки максимального правдободобия многомерного маковского процесса.
+\newpage
+
+\section{Постановка задачи}
+В данной работе мы будет работать с марковским процессом $\{X_n\}_{n \geqslant 0}$ cо значениями в $R^k$, удовлетворяющим уравнениям (1):
+
+\begin{equation} \label{process_definition}
+    \begin{split}
+    X_0 &= x_0 \\
+    X_{n+1} &=\varphi_{\bar{\theta}}\left(X_n\right)+W_{n+1},
+    \end{split}
+\end{equation}
+\begin{flushleft}
+	{
+		\setlength{\leftskip}{5em}
+			\setlength{\rightskip}{5em}
+		\ \ \ \ $x_0 \subset \mathbb{R}^l$ \\
+		\ \ \ \ $\bar{\theta} \in \mathbb{B}\subset \mathbb{R}^l$ \\
+		\ \ \ \ $\varphi_{\bar{\theta}}$ - борелевская ограниченная функция, зависящая от неслучайного векторного параметра (эта функция несёт в себе всю информацию о "природе" изменения марковского процесса; далее мы более подробно рассмотри необходимые условия на неё). \\
+		\ \ \ \ $W_i$ - одинаково распределённые случайные вектора, независимые в совокупности с плотностью $q(\bar{x})$. (эти случайные величины моделируют помехи, происходящие между соседними положениями марковского процесса). Обратим внимание, что плотность $q(\bar{x})$ будет считаться непрерывной\footnote{Вообще говоря, $q(\bar{x})$ совершенно необязательно не должная зависеть от $\theta$, однако в данной работе мы будем предполагать подобную независимсть ради простоты.}. \\
+	}
+\end{flushleft}
+
+\begin{Designation}
+    $f_{\theta}(\bar{x},\bar{x}')=q(x'-\varphi_{\theta}(x))$ - переходная плотность $X_n$.
+\end{Designation}
+
+\begin{Designation}
+	$ P^{\tilde{\theta}}_x \ $ - вероятность, соостветствующую процессу $X$ при $X_0=x$ с параметром $\tilde{\theta}$.
+\end{Designation}
+
+\begin{Designation}
+	$E^{\tilde{\theta}}_x$ - математическое ожидание, соответствующее процессу $X$ при $X_0=x$ с параметром $\tilde{\theta}$.
+\end{Designation}
+
+\begin{Definition}
+Случайный процесс Y удовлетворяет условию Дёблина на Q, если
+$$
+    \exists \ n_0>0 : \ \inf_{x, x' \in \mathbb{Q}} \int \min \left\{\frac{P^Q\left(n_0, \ x, \ \,dy\right)}{P^Q\left(n_0, \ x, \ \,dx\right)}, \ 1\right\} P^Q \left(n_0, \ x', \ \,dx\right) \ > 0.
+$$ \label{Deblin}
+\end{Definition}
+
+Пусть для марковского процесса $X$ верны следующие условия:
+
+\begin{equation} \label{assumption1}
+    f_{\bar{\theta}} \text{ непрерывно дифференцируема по каждой координате и ограничена на всём $\mathbb{B}$}
+\end{equation}
+
+\begin{equation} \label{assumption2}
+    E W_0=0
+\end{equation}
+    
+\begin{equation} \label{assumption3}
+    \exists \ m_0 > 4 : \quad E\left|W_0\right|^{m_0} < \infty, \quad
+\end{equation}
+%% Хз, зачем это условие
+
+\begin{equation} \label{assumption4}
+    \begin{split}
+         \left(\frac{\left|\varphi_{\bar{\theta}}(x)\right|}{|x|} - 1\right)\left|x\right|^2 \rightarrow -\infty, \\ \text{при} \ |x| \rightarrow \infty, \forall \ \bar{\theta}\in \mathbb{B}
+     \end{split}
+\end{equation}
+%% Здесь можно рассказать о том, что это условие означает устойчивость
+
+\begin{equation} \label{assumption5}
+    \{X_n\}_{n \geqslant 0} \text{ удовлетворяет условию Дёблина}
+\end{equation}
+
+
+\newpage
+
+\section{Вспомогательные утверждения}
+
+Далее введём и пронумеруем несколько условий:
+
+%  TODO: неплохо бы сказать, что инвариантная мера для процесса X вообще существует по лемме из АЮВ1999 (Теорема 1)
+%  TODO: непонятно, как получается данное неравенство, так как у АЮВ (Теорема 2) нет коэффициента перемешивания
+\begin{equation} \label{total_variation_assumption}
+    \begin{split}
+    \left|\left| \mu^x_n - \mu \right|\right|_{TV} + \beta^x_n \le C(1 + |x|^m)(1 + n)^{-(k + 1)},
+    \end{split}
+\end{equation}
+
+\begin{flushleft}
+	{
+		\setlength{\leftskip}{5em}
+		\setlength{\rightskip}{5em}
+		где используются обозначения: \\
+		$ \left|\left|A-B\right|\right|_{TV} := \sup_{x \in S} \left|A(x) - B(x)\right|$, \\
+		$\mu^x_n$ - функция распределения процесса $X_n$, \\
+		$\mu$ - мера на процессах $X_n$. \\ % не знаю, как сделать отступы, потому что для использования команды \tab он требует подключения пакета tabto в преамбуле, а я не умею.
+		$\beta^x_n := \sup_{s \ge 0}E_x \sup_{B \in F^X_{\ge n + s}}\left(P_x\left(B|F_{\le s}\right) - P\left(B\right)\right)$ \\
+		$F^X_D = \sigma \{ X_s : s \in D \} , D \subset \mathbb{B}$ \\
+	}
+\end{flushleft}
+	
+	% не знаю, как ещё оформить это так, чтобы всё было в нужных местах (например, чтобы подпись супремума была внизу), если это писать просто каждый раз с новой строки, то всё съезжает
+	
+\begin{equation} \label{moments_limiting}
+    \begin{split}
+        \sup_n E_x \left| X_n \right| ^{m'} \le C \left( 1 + |x|^m \right)
+    \end{split}
+\end{equation}
+
+\begin{equation} \label{measure_limiting}
+    \begin{split}
+        \int |x|^m \mu (dx) < \infty
+    \end{split}
+\end{equation}
+
+$\forall \ Q=\left(-N, N\right)$ c достаточно большим $N$ $\exists \ \kappa < 1$:
+\begin{equation} \label{something}
+	P_x\left(\tau^Q_n \ge \kappa^{-1}\cdot n \right) \le C_k \left( 1 +|x|^m \right)\left(1 + n\right)^{-k}
+\end{equation}
+\begin{flushleft}
+	{
+	\setlength{\leftskip}{5em}
+		\setlength{\rightskip}{5em}
+    	где $\tau^Q_{n+1}=\inf \left(t\ge \tau^Q_n +1 : X_t \in Q \right)$, $\tau^Q_0 = 0$. Обратим внимание, что $\left|\bar{x}\right|=\sqrt{x^2_1+x^2_2+...+x^2_k}$, где $\bar{x}$ - это вектор.
+    	\\
+	}
+\end{flushleft}
+
+	
+
+	
+\begin{Lemma}[Веретенников (1999) \cite{Veretennikov99}] \label{VeretennikovLemma1}
+	Процесс $\{X_n\}_{n \geqslant 0}$, удовлетворяющий (\ref{process_definition}), (\ref{assumption1}), (\ref{assumption2}), (\ref{assumption3}), (\ref{assumption4}) и (\ref{assumption5}), удовлетворяет и условиям (\ref{moments_limiting}), (\ref{measure_limiting}) и (\ref{something}).
+\end{Lemma}
+
+	Обратим внимание, что \hyperref[Deblin]{условие Дёблина (6)} с $n_0 = 1$следует из локальной ограниченности $\phi$ и условия $\inf\limits_{Q} q>0, \forall Q=[-N, N], N>0$.
+	\\
+	Это важный момент, так как далее в \hyperref[FisherInformationAsimptotic]{теореме об асимптотике информации Фишера} требуется условие $\inf\limits_{Q} q>0, \forall Q=[-N, N], N>0$,  из которого будет следовать \hyperref[Deblin]{условие Дёблина (6)}, и которого далее по \hyperref[VeretennikovLemma1]{лемме} следуют условия \hyperref[usl2]{(2)}, \hyperref[usl3]{(3)}, \hyperref[usl4]{(4)}, \hyperref[usl5]{(5)}.
+	\\
+	Далее введём несколько обозначений: % Post Attention! Надчёркивания над исками в формулах слишком короткие
+	
+	$$
+	g := E^{\theta}\theta_n
+	$$
+	
+	$$
+	\triangledown g = \left(\begin{array}{ccc} \frac{\partial g}{\partial \theta_1} \\ \frac{\partial g}{\partial \theta_2} \\ ... \\ \frac{\partial g}{\partial \theta_l} \end{array}\right)
+	$$
+	
+	$$
+	L_{\theta, n} := \sum_{I=1}^{n} \log \frac{f_{\theta}\left(\bar{X_{i-1}}, \bar{X_i}\right)}{f_{\theta_0}\left(\bar{X_{i-1}}, \bar{X_i}\right)} = \sum_{I=1}^{n} h_{\theta}\left(\bar{X_{i-1}}, \bar{X_i}\right)
+	$$
+	
+	$$
+	\triangledown L_{\theta, n} = \left(\begin{array}{ccc} \frac{\partial L_{\theta, n}}{\partial \theta_1} \\ \frac{\partial L_{\theta, n}}{\partial \theta_2} \\ ... \\ \frac{\partial L_{\theta, n}}{\partial \theta_l} \end{array}\right)
+	$$
+	
+	\begin{Lemma}[Неравенство Крамера-Рао \cite{CramerRaoDiffenition}]\label{CramerRaoInequall}
+		Пусть $I_n$ - информационная матрица Фишера невырождена, тогда:
+		$$
+		Cov\ T\left(\bar{X}\right)\ge S \cdot I_n \left(\theta\right)^{-1}\cdot S^T,
+		$$
+		\begin{flushleft}
+			{\setlength{\leftskip}{5em}
+				\setlength{\rightskip}{5em}
+		где:
+		\\
+		$T$ - несмещённая статистика, оценивающая $\varphi_\theta$ (т. е. $E_{\theta}T\left(\bar{X}\right)=\varphi_\theta$ $\forall \theta$)
+		\\
+		$S=\left\{s_{ij}\right\}=\partial_{\theta_i}\varphi_j\left(\overline{\theta}\right)$
+		\\
+		$I_n$ - информационная матрица Фишера
+		\\
+		}
+		\end{flushleft}
+	\end{Lemma}
+	
+	\newpage
+
+% не знаю, как ещё оформить это так, чтобы всё было в нужных местах (например, чтобы подпись супремума была внизу), если это писать просто каждый раз с новой строки, то всё съезжает
