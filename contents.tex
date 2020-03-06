@@ -91,47 +91,69 @@ $$ \label{Deblin}
 
 \section{Вспомогательные утверждения}
 
-\begin{Definition}
-
-\end{Definition}
-
 Далее введём и пронумеруем несколько условий:
-%%  TODO: Неплохо бы добавить определение Total Variation
-%%  TODO: Неплохо бы дать определение коэффициента (ов)
 %%  TODO: неплохо бы сказать, что инвариантная мера для процесса X вообще существует по лемме из АЮВ1999 (Теорема 1)
 %%  TODO: непонятно, как получается данное неравенство, так как у АЮВ (Теорема 2) нет коэффициента перемешивания
-\begin{equation} \label{total_variation_assumption}
-    \begin{split}
-    \left|\left| \mu^x_n - \mu \right|\right|_{TV} + \beta^x_n \le C(1 + |x|^m)(1 + n)^{-(k + 1)},
-    \end{split}
-\end{equation}
-
-\begin{flushleft}
-	{
-		\setlength{\leftskip}{5em}
-		\setlength{\rightskip}{5em}
-		где используются обозначения: \\
-		$ \left|\left|A-B\right|\right|_{TV} := \sup_{x \in S} \left|A(x) - B(x)\right|$, \\
-		$\mu^x_n$ - функция распределения процесса $X_n$, \\
-		$\mu$ - мера на процессах $X_n$. \\ % не знаю, как сделать отступы, потому что для использования команды \tab он требует подключения пакета tabto в преамбуле, а я не умею.
-		$\beta^x_n := \sup_{s \ge 0}E_x \sup_{B \in F^X_{\ge n + s}}\left(P_x\left(B|F_{\le s}\right) - P\left(B\right)\right)$ \\
-		$F^X_D = \sigma \{ X_s : s \in D \} , D \subset \mathbb{B}$ \\
-	}
-\end{flushleft}
-	
-	% не знаю, как ещё оформить это так, чтобы всё было в нужных местах (например, чтобы подпись супремума была внизу), если это писать просто каждый раз с новой строки, то всё съезжает
-	
-\begin{equation} \label{moments_limiting}
-    \begin{split}
-        \sup_n E_x \left| X_n \right| ^{m'} \le C \left( 1 + |x|^m \right)
-    \end{split}
-\end{equation}
 
 \begin{equation} \label{measure_limiting}
     \begin{split}
         \int |x|^m \mu (dx) < \infty
     \end{split}
 \end{equation}
+
+Обращаю внимание на то, что данное условие согласно Теореме 1 из АЮВ1999 следует для описанного выше марковского процесса процесса из всех предположений, которые мы сделали выше. Более того из той же Теоремы 1 следует существование инвариантной меры на марковском процессе.
+
+\begin{equation} \label{moments_asymptotic}
+    \begin{split}
+        \sup_n E_x \left| X_n \right| ^{m'} \le C \left( 1 + |x|^m \right)
+    \end{split}
+\end{equation}
+
+Данное условие так же согласно АЮВ1999 из Теоремы 3 следует из описанных выше предположений.
+
+\begin{Definition}
+$$ 
+    \left|\left|A-B\right|\right|_{TV} := \sup_{x \in S} \left|A(x) - B(x)\right|
+$$
+\end{Definition}
+Такая метрика называется метрикой полной вариации.
+
+\begin{Definition}
+$$ 
+    \beta^x_n := \sup_{s \ge 0}E_x \sup_{B \in F^X_{\ge n + s}}\left(P_x\left(B|F_{\le s}\right) - P\left(B\right)\right),
+$$
+\setlength{\leftskip}{5em}
+\setlength{\rightskip}{5em}
+    где $F^X_D = \sigma \{ X_s : s \in D \} , D \subset \mathbb{B}$.
+\end{Definition}
+Такое число называется коэффициентом $\beta$-перемешивания.
+
+\begin{Designation}
+	Обозначим среднее значение коэффициента $\beta$-перемешивания:
+$$
+    \bar{\beta_n} = \int \beta^x_n \ \mu(dx)
+$$
+\end{Designation}
+
+Это оценка сверху коэффициента $\beta$-перемешивания для стационарной версии процесса.
+
+%  TODO: точно функция распределения процесса?
+\begin{Designation}
+    $\mu^x_n$ - функция распределения процесса $X_n$.
+\end{Designation}
+
+%  TODO: что такое "мера на процессах"?
+\begin{Designation}
+    $\mu$ - мера на процессах $X_n$.
+\end{Designation}
+
+\begin{equation} \label{total_variation_assumption}
+    \begin{split}
+    \left|\left| \mu^x_n - \mu \right|\right|_{TV} + \beta^x_n \le C(1 + |x|^m)(1 + n)^{-(k + 1)},
+    \end{split}
+\end{equation}
+
+Обратим внимание на то, что данные неравенство следует из Теоремы 3 из АЮВ1999.
 
 $\forall \ Q=\left(-N, N\right)$ c достаточно большим $N$ $\exists \ \kappa < 1$:
 \begin{equation} \label{something}
@@ -146,9 +168,6 @@ $\forall \ Q=\left(-N, N\right)$ c достаточно большим $N$ $\exi
 	}
 \end{flushleft}
 
-	
-
-	
 \begin{Lemma}[Веретенников (1999) \cite{Veretennikov99}] \label{VeretennikovLemma1}
 	Процесс $\{X_n\}_{n \geqslant 0}$, удовлетворяющий (\ref{process_definition}), (\ref{assumption1}), (\ref{assumption2}), (\ref{assumption3}), (\ref{assumption4}) и (\ref{assumption5}), удовлетворяет и условиям (\ref{moments_limiting}), (\ref{measure_limiting}) и (\ref{something}).
 \end{Lemma}
